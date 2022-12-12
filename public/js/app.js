@@ -54,7 +54,9 @@ $('.navLink').click(function(e){
     e.preventDefault()
     var url = $(this).attr('href')
     var theme = $(this).attr('theme')
+    var title = $(this).children('.navTitle').text()
     history.pushState(null,null,url)
+    document.title = 'To-Do | ' + title
     $('.listTitle').load(document.URL + ' h4')
     $('.content').load(document.URL + ' .todoList')
     checkUrl()
