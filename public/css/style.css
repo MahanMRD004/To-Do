@@ -1,0 +1,998 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+html {
+  --bg-clr: #2A3240;
+  --primary-clr: #425A7D;
+  --secondary-clr: #A0C0D6;
+  --text-clr: #E5FAFC;
+  --danger-clr: #DF7356;
+  --active-clr: rgba(187, 187, 187, 0.19);
+  --transparent-clr: #ffffff20;
+  --inverted-clr: #2c2c2c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+ion-icon {
+  pointer-events: none;
+}
+
+.bg-img {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: top;
+  z-index: -1;
+}
+.bg-img img {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 750ms ease-in-out;
+  user-select: none;
+}
+.bg-img img.active {
+  opacity: 1;
+}
+
+body::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #222227;
+  border-radius: 150px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 150px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #737373;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  color: var(--text-clr);
+}
+body > .bg-img .backgruond {
+  filter: blur(50px) brightness(40%);
+  transform: scale(2);
+}
+body .container-fluid {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  overflow: hidden;
+}
+body .container-fluid .sidebar {
+  position: absolute;
+  height: 100%;
+  width: 275px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1450980392);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2705882353);
+  padding: 1rem;
+  bottom: 0;
+  left: 0;
+  transition: left 450ms linear;
+  backdrop-filter: blur(500px);
+  z-index: 10;
+}
+body .container-fluid .sidebar .user {
+  position: relative;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.8rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid var(--transparent-clr);
+  border-radius: 0.6rem;
+  user-select: none;
+  overflow: hidden;
+}
+body .container-fluid .sidebar .user:hover .logoutForm {
+  opacity: 1;
+  transform: translatex(0);
+}
+body .container-fluid .sidebar .user .profile-img {
+  aspect-ratio: 1;
+  height: 70%;
+  outline: 1px solid var(--secondary-clr);
+  outline-offset: 3px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+body .container-fluid .sidebar .user .info .name {
+  font-weight: 500;
+}
+body .container-fluid .sidebar .user .info .email {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  font-weight: 300;
+}
+body .container-fluid .sidebar .user .logoutForm {
+  position: absolute;
+  height: 100%;
+  aspect-ratio: 1;
+  background: var(--danger-clr);
+  right: 0;
+  top: 0;
+  transform: translatex(100%);
+  opacity: 0;
+  border-radius: 0.6rem;
+  transition: all 300ms linear;
+}
+body .container-fluid .sidebar .user .logoutForm input {
+  display: none;
+}
+body .container-fluid .sidebar .user .logoutForm label {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-content: center;
+}
+body .container-fluid .sidebar .nav {
+  height: calc(100% - 135px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border: 1rem;
+}
+body .container-fluid .sidebar .nav .navigation {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0.5rem 0;
+}
+body .container-fluid .sidebar .nav .navigation.default {
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--secondary-clr);
+}
+body .container-fluid .sidebar .nav .navigation li {
+  height: 35px;
+  width: 100%;
+}
+body .container-fluid .sidebar .nav .navigation .navItem {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  padding-inline: 0.5rem;
+  border: 1px solid var(--transparent-clr);
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 250ms all ease;
+}
+body .container-fluid .sidebar .nav .navigation .navItem ion-icon {
+  font-size: 1.5em;
+}
+body .container-fluid .sidebar .nav .navigation .navItem .navTitle {
+  font-size: 0.9em;
+  font-weight: 400;
+}
+body .container-fluid .sidebar .nav .navigation .navItem:hover {
+  border: 1px solid var(--secondary-clr);
+}
+body .container-fluid .sidebar .nav .navigation .navItem.active {
+  background: var(--active-clr);
+  color: var(--text-clr);
+  border: 1px solid var(--transparent-clr);
+}
+body .container-fluid .sidebar .nav .navigation .navItem.active:before {
+  content: "";
+  position: absolute;
+  height: 70%;
+  width: 4px;
+  left: -3px;
+  background: var(--secondary-clr);
+  border-radius: 15px;
+}
+body .container-fluid .sidebar .nav .userListsWrapper {
+  height: calc(100% - 165px);
+}
+body .container-fluid .sidebar .nav .userListsWrapper .userLists {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+body .container-fluid .sidebar .nav .userListsWrapper .userLists li {
+  position: relative;
+}
+body .container-fluid .sidebar .nav .userListsWrapper .userLists li button {
+  position: absolute;
+  height: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: var(--text-clr);
+  border-radius: 0.5rem;
+  right: 0;
+  top: 0;
+  transition: background 300ms ease;
+}
+body .container-fluid .sidebar .nav .userListsWrapper .userLists li button:hover {
+  background: var(--danger-clr);
+}
+body .container-fluid .sidebar .controls {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  left: 0;
+  bottom: 0;
+  padding: 0.5rem 0.7rem;
+}
+body .container-fluid .sidebar .controls input {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: var(--text-clr);
+  border-radius: 0.5rem;
+  padding-inline: 1rem;
+}
+body .container-fluid .sidebar .controls input:hover {
+  background: var(--active-clr);
+  color: var(--text-clr);
+}
+body .container-fluid .sidebar .controls input::placeholder {
+  color: var(--text-clr);
+}
+body .container-fluid .sidebar .controls .btn {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-clr);
+  border-radius: 0.5rem;
+}
+body .container-fluid .sidebar .controls .btn ion-icon {
+  font-size: 1.7rem;
+}
+body .container-fluid .sidebar .controls .btn:hover {
+  background: var(--active-clr);
+  color: var(--text-clr);
+}
+body .container-fluid .sidebar .controls .btn-sq {
+  aspect-ratio: 1;
+  width: auto;
+  justify-content: center;
+}
+body .container-fluid main {
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 275px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+  padding: 1rem 2.5rem;
+  bottom: 0;
+  right: 0;
+  transition: width 450ms linear, right 450ms linear, filter 450ms ease;
+}
+body .container-fluid main header {
+  height: 75px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body .container-fluid main header .wrapper .btn {
+  position: relative;
+  aspect-ratio: 1;
+  width: fit-content;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-clr);
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: none;
+  padding: 0;
+}
+body .container-fluid main header .wrapper .btn ion-icon {
+  transition: opacity 100ms ease;
+}
+body .container-fluid main header .wrapper .btn ion-icon[name=close] {
+  position: absolute;
+  opacity: 0;
+}
+body .container-fluid main header .wrapper .btn .absolute {
+  display: none;
+}
+body .container-fluid main header .info {
+  height: fit-content;
+  width: fit-content;
+}
+body .container-fluid main header .info .listTitle {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+body .container-fluid main header .info .date {
+  font-size: 1rem;
+  font-weight: 300;
+}
+body .container-fluid main header .controls {
+  height: fit-content;
+  width: fit-content;
+}
+body .container-fluid main header .controls .btn {
+  aspect-ratio: 1;
+  width: fit-content;
+  display: grid;
+  place-content: center;
+  color: var(--text-clr);
+  font-size: 1.4rem;
+  background-color: var(--transparent-clr);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--transparent-clr);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  box-shadow: none;
+}
+body .container-fluid main header .controls .btn:hover {
+  border: 1px solid var(--secondary-clr);
+}
+body .container-fluid main .content {
+  height: calc(100% - 145px);
+  width: 100%;
+}
+body .container-fluid main .content .todoList {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+  padding-inline: min(2vw, 0.5rem);
+  overflow-y: auto;
+}
+body .container-fluid main .content .todoList .todoItem {
+  position: relative;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--transparent-clr);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--transparent-clr);
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  user-select: none;
+  flex-shrink: 0;
+  transition: opacity 300ms ease;
+}
+body .container-fluid main .content .todoList .todoItem.emptyList {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+}
+body .container-fluid main .content .todoList .todoItem.emptyList .emptyContent {
+  height: fit-content;
+  width: fit-content;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.1254901961);
+  backdrop-filter: blur(3px);
+  border: 2px solid var(--transparent-clr);
+  border-radius: 1rem;
+  padding: min(5vw, 2rem) min(10vw, 5rem);
+  margin: 1rem;
+}
+body .container-fluid main .content .todoList .todoItem.emptyList .emptyContent .text {
+  color: var(--text-clr);
+  text-align: center;
+  font-weight: 500;
+}
+body .container-fluid main .content .todoList .todoItem.emptyList .emptyContent .text h4 {
+  font-size: 1.65rem;
+}
+body .container-fluid main .content .todoList .todoItem.emptyList .emptyContent .text p {
+  font-size: 0.9rem;
+}
+body .container-fluid main .content .todoList .todoItem.emptyList .emptyContent .imgWrapper {
+  aspect-ratio: 1;
+  width: min(35vw, 250px);
+  flex-shrink: 0;
+}
+@media screen and (max-width: 400px) {
+  body .container-fluid main .content .todoList .todoItem.emptyList .emptyContent .text p {
+    font-size: 0.8rem;
+  }
+}
+body .container-fluid main .content .todoList .todoItem.done {
+  opacity: 0.7;
+  order: 2;
+}
+body .container-fluid main .content .todoList .todoItem.done .info .check ion-icon {
+  opacity: 1;
+}
+body .container-fluid main .content .todoList .todoItem.stared {
+  order: -1;
+}
+body .container-fluid main .content .todoList .todoItem.stared ion-icon[name=star-outline] {
+  opacity: 0;
+  display: none;
+}
+body .container-fluid main .content .todoList .todoItem.stared ion-icon[name=star] {
+  display: inline-block;
+  opacity: 1;
+}
+body .container-fluid main .content .todoList .todoItem ion-icon[name=star] {
+  display: none;
+  opacity: 0;
+  transition: 300ms opacity ease;
+}
+body .container-fluid main .content .todoList .todoItem .info {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-clr);
+  padding-inline: 0.5rem;
+}
+body .container-fluid main .content .todoList .todoItem .info .check {
+  aspect-ratio: 1;
+  width: 25px;
+  display: grid;
+  place-content: center;
+  background-color: var(--transparent-clr);
+  border: 1px solid var(--transparent-clr);
+  border-radius: 50%;
+  cursor: pointer;
+}
+body .container-fluid main .content .todoList .todoItem .info .check ion-icon {
+  opacity: 0;
+  color: var(--secondary-clr);
+  transition: opacity 300ms ease;
+}
+body .container-fluid main .content .todoList .todoItem .info .taskName {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-weight: 400;
+  font-size: 0.9em;
+}
+body .container-fluid main .content .todoList .todoItem .info .taskName span {
+  font-weight: 300;
+  font-size: 0.8em;
+  color: var(--text-clr);
+  opacity: 0.9;
+}
+body .container-fluid main .content .todoList .todoItem .controls {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-inline: 0.5rem;
+}
+body .container-fluid main .content .todoList .todoItem .controls button {
+  height: 30px;
+  width: 30px;
+  display: grid;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: var(--text-clr);
+  font-size: 1rem;
+  place-content: center;
+  border-radius: 0.5rem;
+  transition: 300ms background ease;
+}
+body .container-fluid main .content .todoList .todoItem .controls button:hover {
+  background: var(--transparent-clr);
+}
+body .container-fluid main .taskInput {
+  height: 55px;
+  width: 100%;
+  backdrop-filter: blur(150px);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+body .container-fluid main .taskInput form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* <select> styles */
+}
+body .container-fluid main .taskInput form input[type=text] {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-clr);
+  padding-inline: 1rem;
+  font-weight: 300;
+}
+body .container-fluid main .taskInput form input[type=text]::placeholder {
+  color: var(--text-clr);
+}
+body .container-fluid main .taskInput form .wrapper {
+  height: 100%;
+  width: calc(20.2em + 55px);
+  display: flex;
+  justify-content: flex-end;
+}
+body .container-fluid main .taskInput form .selectWrapper {
+  height: 100%;
+  width: fit-content;
+}
+body .container-fluid main .taskInput form select {
+  /* Reset */
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  /* Personalize */
+  height: 100%;
+  width: fit-content;
+  max-width: 75px;
+  padding: 0 1rem;
+  background: transparent;
+  color: var(--text-clr);
+  text-align: center;
+  transition: 300ms background-color ease;
+  cursor: pointer;
+  /* <option> colors */
+  /* Remove focus outline */
+  /* Remove IE arrow */
+}
+body .container-fluid main .taskInput form select option {
+  color: inherit;
+  text-align: left;
+  background-color: var(--primary-clr);
+}
+body .container-fluid main .taskInput form select:focus {
+  outline: none;
+}
+body .container-fluid main .taskInput form select::-ms-expand {
+  display: none;
+}
+body .container-fluid main .taskInput form select:hover {
+  background-color: var(--transparent-clr);
+}
+body .container-fluid main .taskInput form .datePicker {
+  position: relative;
+  height: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+body .container-fluid main .taskInput form input[type=date] {
+  position: absolute;
+  height: 100%;
+  width: fit-content;
+  top: 0;
+  right: 10px;
+  opacity: 0;
+}
+body .container-fluid main .taskInput form #dateLabel {
+  height: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  background: transparent;
+  font-size: 1em;
+  color: var(--text-clr);
+  transition: 300ms background ease;
+  flex-shrink: 0;
+  user-select: none;
+  pointer-events: none;
+}
+body .container-fluid main .taskInput form #dateLabel:hover {
+  background: var(--transparent-clr);
+}
+body .container-fluid main .taskInput form button {
+  aspect-ratio: 1;
+  height: 100%;
+  display: grid;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: var(--text-clr);
+  font-size: 1.8rem;
+  place-content: center;
+  border-radius: 0 0.5rem 0.5rem 0;
+  transition: 300ms background ease;
+}
+body .container-fluid main .taskInput form button:hover {
+  background: var(--transparent-clr);
+}
+body .container-fluid .formWrapper {
+  height: fit-content;
+  width: min(85vw, 100%);
+  max-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--transparent-clr);
+  backdrop-filter: blur(500px);
+  border: 2px solid var(--transparent-clr);
+  border-radius: 1rem;
+  padding: min(10vw, 3.5rem) min(5vw, 3.2rem);
+  margin: 1rem;
+  box-shadow: 0 0 1rem 3px rgba(0, 0, 0, 0.2705882353);
+}
+body .container-fluid .formWrapper form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+body .container-fluid .formWrapper form .form-floating {
+  height: 3rem;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+body .container-fluid .formWrapper form .form-floating .filepond--panel-root {
+  background-color: transparent;
+}
+body .container-fluid .formWrapper form .form-floating .filepond--drop-label {
+  color: var(--text-clr);
+}
+body .container-fluid .formWrapper form .form-floating.imageInput {
+  height: 6rem;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: var(--text-clr);
+  border: none;
+  outline: 1px solid var(--transparent-clr);
+  border-radius: 0.5rem;
+  transition: outline 300ms ease;
+  padding: min(4.5vw, 1.5rem);
+}
+body .container-fluid .formWrapper form .form-floating.imageInput:focus {
+  border: none;
+  outline: 3px solid var(--secondary-clr);
+  box-shadow: none;
+}
+body .container-fluid .formWrapper form .form-floating.imageInput label {
+  font-size: 0.8rem;
+  color: var(--text-clr);
+}
+body .container-fluid .formWrapper form .form-floating .form-control {
+  height: 100%;
+  background: transparent;
+  color: var(--text-clr);
+  border: none;
+  outline: 1px solid var(--transparent-clr);
+  transition: outline 300ms ease;
+}
+body .container-fluid .formWrapper form .form-floating .form-control:focus {
+  border: none;
+  outline: 3px solid var(--secondary-clr);
+  box-shadow: none;
+}
+body .container-fluid .formWrapper form .form-floating > label {
+  padding: 0.75rem 0.5rem;
+  font-size: 0.8rem;
+}
+body .container-fluid .formWrapper form .form-check {
+  height: fit-content;
+  width: 100%;
+}
+body .container-fluid .formWrapper form .form-check .form-check-input {
+  box-shadow: none;
+}
+body .container-fluid .formWrapper form .form-check .form-check-label {
+  font-size: 0.9rem;
+  color: var(--text-clr);
+}
+body .container-fluid .formWrapper form input[type=submit] {
+  height: 3rem;
+  width: 100%;
+  background: var(--transparent-clr);
+  outline: none;
+  border: none;
+  color: var(--text-clr);
+  border-radius: 0.4rem;
+  transition: 300ms background ease;
+}
+body .container-fluid .formWrapper form input[type=submit]:hover {
+  background: var(--secondary-clr);
+}
+body .container-fluid .formWrapper p {
+  font-size: 0.85rem;
+}
+body .container-fluid .formWrapper p a {
+  text-decoration: none;
+  color: var(--secondary-clr);
+  transition: color 300ms ease;
+}
+body .container-fluid .formWrapper p a:hover {
+  color: var(--primary-clr);
+}
+body .container-fluid .formWrapper .errorMessage {
+  height: fit-content;
+  width: 100%;
+}
+body .container-fluid .formWrapper .errorMessage ul {
+  height: fit-content;
+  width: 100%;
+  list-style: none;
+  font-size: 0.7em;
+  color: var(--danger-clr);
+  margin: 0;
+  padding: 0;
+}
+body .container-fluid .modalWrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4588235294);
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+body .container-fluid .modalWrapper.active {
+  visibility: visible;
+  opacity: 1;
+}
+body .container-fluid .modalWrapper.active .modal {
+  transform: translateY(0);
+}
+body .container-fluid .modalWrapper .modal {
+  position: relative;
+  all: unset;
+  height: fit-content;
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--transparent-clr);
+  backdrop-filter: blur(100px);
+  border: 2px solid var(--transparent-clr);
+  border-radius: 1rem;
+  padding: min(5vw, 2rem);
+  margin: 1rem;
+  box-shadow: 0 0 1rem 3px rgba(0, 0, 0, 0.1450980392);
+  transform: translateY(-55px);
+  transition: transform 500ms linear;
+}
+body .container-fluid .modalWrapper .modal button {
+  position: absolute;
+  aspect-ratio: 1;
+  width: fit-content;
+  display: grid;
+  place-content: center;
+  color: var(--text-clr);
+  font-size: 1rem;
+  background-color: var(--transparent-clr);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--transparent-clr);
+  border-radius: 0.5rem;
+  box-shadow: none;
+  z-index: 100;
+  top: 1rem;
+  right: 1rem;
+  padding: min(2vw, 1rem);
+}
+body .container-fluid .modalWrapper .modal button:hover {
+  border: 1px solid var(--secondary-clr);
+}
+body .container-fluid .modalWrapper .themeSelector {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  /* <select> styles */
+}
+body .container-fluid .modalWrapper .themeSelector .themes {
+  list-style: none;
+  height: 300px;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: min(4vw, 1.5rem);
+  margin: 0;
+  padding: min(2vw, 0.5rem);
+  overflow-y: auto;
+}
+body .container-fluid .modalWrapper .themeSelector .themes input[type=radio] {
+  display: none;
+}
+body .container-fluid .modalWrapper .themeSelector .themes .theme {
+  position: relative;
+  height: min(25vw, 125px);
+  width: min(35vw, 175px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--transparent-clr);
+  outline: 2px solid transparent;
+  transition: outline-offset 350ms linear, outline-color 350ms ease;
+}
+body .container-fluid .modalWrapper .themeSelector .themes .theme.selected {
+  outline: 2px solid var(--secondary-clr);
+  outline-offset: 3px;
+}
+body .container-fluid .modalWrapper .themeSelector .themes .theme label {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  cursor: pointer;
+}
+body .container-fluid .modalWrapper .themeSelector .themes .theme .image {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+body .container-fluid .modalWrapper .themeSelector .themes .theme p {
+  position: absolute;
+  margin: 0;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+body .container-fluid .modalWrapper .themeSelector .selectWrapper {
+  height: 50px;
+  width: 100%;
+}
+body .container-fluid .modalWrapper .themeSelector select {
+  /* Reset */
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  /* Personalize */
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem;
+  background: var(--transparent-clr);
+  color: var(--text-clr);
+  border-radius: 0.5rem;
+  transition: 300ms background-color ease;
+  cursor: pointer;
+  /* <option> colors */
+  /* Remove focus outline */
+  /* Remove IE arrow */
+}
+body .container-fluid .modalWrapper .themeSelector select option {
+  color: inherit;
+  background-color: var(--primary-clr);
+}
+body .container-fluid .modalWrapper .themeSelector select:focus {
+  outline: none;
+}
+body .container-fluid .modalWrapper .themeSelector select::-ms-expand {
+  display: none;
+}
+body .container-fluid .modalWrapper .themeSelector select:hover {
+  background-color: var(--secondary-clr);
+}
+body .container-fluid .modalWrapper .themeSelector input[type=submit] {
+  height: 3rem;
+  width: 100%;
+  background: var(--transparent-clr);
+  outline: none;
+  border: none;
+  color: var(--text-clr);
+  border-radius: 0.4rem;
+  transition: 300ms background ease;
+}
+body .container-fluid .modalWrapper .themeSelector input[type=submit]:hover {
+  background: var(--secondary-clr);
+}
+@media screen and (max-width: 800px) {
+  body .container-fluid .sidebar {
+    left: -275px;
+  }
+  body .container-fluid .sidebar.open {
+    left: 0;
+  }
+  body .container-fluid .sidebar.open ~ main {
+    right: -275px;
+    filter: brightness(0.7);
+  }
+  body .container-fluid main {
+    width: 100%;
+    padding: 1rem;
+  }
+  body .container-fluid main header .wrapper .btn {
+    position: static;
+    display: flex;
+  }
+  body .container-fluid main header .wrapper .btn.open ion-icon[name=close] {
+    opacity: 1;
+  }
+  body .container-fluid main header .wrapper .btn.open ion-icon[name=menu] {
+    opacity: 0;
+  }
+  body .container-fluid main header .wrapper .btn.open .absolute {
+    position: absolute;
+    display: block;
+    inset: 0;
+    z-index: 9;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
