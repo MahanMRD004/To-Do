@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     @yield('customStyle')
 
-    <title>To-Do |{{$listTitle}}</title>
+    <title>To-Do | {{$listTitle}}</title>
 
 </head>
 

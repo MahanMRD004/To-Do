@@ -122,10 +122,18 @@ body {
                 user-select: none;
                 overflow: hidden;
 
-                &:hover .logoutForm {
+                &:hover .logoutForm
+                 {
                     opacity: 1;
                     transform: translatex(0);
                 }
+
+                &:hover .editInfo
+                {
+                    opacity: 1;
+                    transform: translatex(0);
+                }
+
 
                 .profile-img {
                     aspect-ratio: 1;
@@ -158,7 +166,8 @@ body {
                     transform: translatex(100%);
                     opacity: 0;
                     border-radius: 0.6rem;
-                    transition: all 300ms linear;
+                    transition: transform 300ms linear, opacity 300ms ease;
+                    cursor: pointer;
 
                     input {
                         display: none;
@@ -171,6 +180,23 @@ body {
                         place-content: center;
                     }
                 }
+
+                .editInfo {
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    background-color: var(--primary-clr);
+                    color: var(--text-clr);
+                    text-align: left;
+                    padding-left: 60px;
+                    border-radius: 0.6rem;
+                    transform: translateX(100%);
+                    opacity: 0;
+                    transition: transform 475ms linear, opacity 300ms ease;
+                    top: 0;
+                    left: 0;
+                }
+
             }
 
             .nav {
@@ -796,6 +822,10 @@ body {
                         color: var(--text-clr);
                     }
 
+                    .filepond--credits {
+                        display: none;
+                    }
+
                     &.imageInput {
                         height: 6rem;
                         width: 100%;
@@ -946,7 +976,7 @@ body {
                 transform: translateY(-55px);
                 transition: transform 500ms linear;
 
-                button {
+                .btn {
                     position: absolute;
                     aspect-ratio: 1;
                     width: fit-content;
@@ -1091,6 +1121,33 @@ body {
                 }
             }
         }
+
+        .editInfoModal {
+            .modal {
+                height: fit-content;
+                width: min(100%, 25rem);
+                margin: 1rem;
+
+                .formWrapper {
+                    height: 100%;
+                    width: 100%;
+                    max-width: unset;
+                    background: transparent;
+                    backdrop-filter: none;
+                    border: none;
+                    border-radius: 0;
+                    margin: 0;
+                    padding: 0;
+                    box-shadow: none;
+
+                    .form-floating {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+
 
         @media screen and (max-width: 800px)  {
 

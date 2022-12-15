@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('customStyle')
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+@endsection
 
 {{--SideBar--}}
 @section('sideBar')
@@ -28,7 +31,7 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="btn" onclick="openModal()"><ion-icon name="sparkles-outline"></ion-icon></button>
+                <button class="btn" onclick="openThemes()"><ion-icon name="sparkles-outline"></ion-icon></button>
             </div>
         </header>
         <section class="content">
@@ -92,7 +95,7 @@
     </main>
 @endsection
 @section('modal')
-    <div class="modalWrapper">
+    <div class="modalWrapper themesModal">
         <div class="modal">
             <button class="btn" onclick="closeModal()"><ion-icon name="close-outline"></ion-icon></button>
             <form  class="themeSelector" action="{{route('setTheme')}}" method="POST">
@@ -119,4 +122,41 @@
             </form>
         </div>
     </div>
+
+    <div class="modalWrapper editInfoModal">
+        <div class="modal">
+            <h5>Change your info</h5>
+            <button class="btn" onclick="closeModal()"><ion-icon name="close-outline"></ion-icon></button>
+            <div class="formWrapper">
+            <form  action="{{route('editInfo')}}" method="POST">
+                {{csrf_field()}}
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Sombody">
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating imageInput">
+                    <input type="file" name="profile" id="profile">
+                    <label for="profile">Profile</label>
+                </div>
+                <input type="submit">
+            </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('customJS')
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script>
+        const inputElement = document.querySelector('#profile');
+        const pond = FilePond.create(inputElement);
+        FilePond.setOptions({
+            server: {
+                url: '{{route('store')}}',
+                headers : {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            }
+        });
+    </script>
 @endsection

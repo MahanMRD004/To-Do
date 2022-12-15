@@ -126,6 +126,10 @@ body .container-fluid .sidebar .user:hover .logoutForm {
   opacity: 1;
   transform: translatex(0);
 }
+body .container-fluid .sidebar .user:hover .editInfo {
+  opacity: 1;
+  transform: translatex(0);
+}
 body .container-fluid .sidebar .user .profile-img {
   aspect-ratio: 1;
   height: 70%;
@@ -153,7 +157,8 @@ body .container-fluid .sidebar .user .logoutForm {
   transform: translatex(100%);
   opacity: 0;
   border-radius: 0.6rem;
-  transition: all 300ms linear;
+  transition: transform 300ms linear, opacity 300ms ease;
+  cursor: pointer;
 }
 body .container-fluid .sidebar .user .logoutForm input {
   display: none;
@@ -163,6 +168,21 @@ body .container-fluid .sidebar .user .logoutForm label {
   width: 100%;
   display: grid;
   place-content: center;
+}
+body .container-fluid .sidebar .user .editInfo {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
+  text-align: left;
+  padding-left: 60px;
+  border-radius: 0.6rem;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 475ms linear, opacity 300ms ease;
+  top: 0;
+  left: 0;
 }
 body .container-fluid .sidebar .nav {
   height: calc(100% - 135px);
@@ -705,6 +725,9 @@ body .container-fluid .formWrapper form .form-floating .filepond--panel-root {
 body .container-fluid .formWrapper form .form-floating .filepond--drop-label {
   color: var(--text-clr);
 }
+body .container-fluid .formWrapper form .form-floating .filepond--credits {
+  display: none;
+}
 body .container-fluid .formWrapper form .form-floating.imageInput {
   height: 6rem;
   width: 100%;
@@ -833,7 +856,7 @@ body .container-fluid .modalWrapper .modal {
   transform: translateY(-55px);
   transition: transform 500ms linear;
 }
-body .container-fluid .modalWrapper .modal button {
+body .container-fluid .modalWrapper .modal .btn {
   position: absolute;
   aspect-ratio: 1;
   width: fit-content;
@@ -851,7 +874,7 @@ body .container-fluid .modalWrapper .modal button {
   right: 1rem;
   padding: min(2vw, 1rem);
 }
-body .container-fluid .modalWrapper .modal button:hover {
+body .container-fluid .modalWrapper .modal .btn:hover {
   border: 1px solid var(--secondary-clr);
 }
 body .container-fluid .modalWrapper .themeSelector {
@@ -961,6 +984,26 @@ body .container-fluid .modalWrapper .themeSelector input[type=submit] {
 }
 body .container-fluid .modalWrapper .themeSelector input[type=submit]:hover {
   background: var(--secondary-clr);
+}
+body .container-fluid .editInfoModal .modal {
+  height: fit-content;
+  width: min(100%, 25rem);
+  margin: 1rem;
+}
+body .container-fluid .editInfoModal .modal .formWrapper {
+  height: 100%;
+  width: 100%;
+  max-width: unset;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}
+body .container-fluid .editInfoModal .modal .formWrapper .form-floating {
+  width: 100%;
 }
 @media screen and (max-width: 800px) {
   body .container-fluid .sidebar {

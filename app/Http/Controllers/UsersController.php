@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 class UsersController extends Controller
@@ -23,9 +24,10 @@ class UsersController extends Controller
         if (Auth::check()) {
             return redirect(route('myDay'));
         }
+        $listTitle = "Signup";
         $themes = Theme::all();
         $currentTheme = Theme::where('id', rand(1,7))->first();
-        return view('auth.signup', compact('themes','currentTheme'));
+        return view('auth.signup', compact('themes','currentTheme', 'listTitle'));
     }
 
     public function signupPost(request $request)
@@ -37,35 +39,38 @@ class UsersController extends Controller
             'verifyPassword' => 'required|same:password'
         ]);
 
+
+        if ($validator->fails()) {
+            if ($request->profile) {
+                $tempFile = TempFile::where('folder', $request->profile)->first();
+                Storage::disk('local')->deleteDirectory('profiles/tmp/' . $request->profile);
+                $tempFile->delete();
+            }
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $newUser = new User();
         $newUser -> name = $request->name;
         $newUser -> email = $request->email;
         $newUser -> password = Hash::make($request->password);
         $newUser->save();
-        auth()->login($newUser);
 
-        if($request->profile) {
+        if ($request->profile) {
             $tempFile = TempFile::where('folder', $request->profile)->first();
+            $newUser->addMedia(storage_path('app/profiles/tmp/' . $request->profile . '/' . $tempFile->fileName))
+                ->toMediaCollection('profile');
+            $profile = $newUser->getFirstMedia('profile');
+            $newUser ->profile = 'storage/'.$profile->id.'/'.$profile->file_name;
+            $newUser->save();
 
-            if ($validator->fails()) {
-                Storage::disk('local')->deleteDirectory('profiles/tmp/' . $request->profile);
-                $tempFile->delete();
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            $newUser->addMedia(storage_path('app/profiles/tmp/' . $request->profile . '/' . $tempFile->fileName))->toMediaCollection('profile');
             Storage::disk('local')->deleteDirectory('profiles/tmp/' . $request->profile);
-
-            $user = Auth::user();
-            $user-> profile = 'storage/' . $user->id . '/' . $tempFile->fileName;
             $tempFile->delete();
-            $user->save();
         }
 
-
+        auth()->login($newUser);
         $newList = new TodoList();
         $newList -> title = 'Tasks';
-        $newList -> user_id = Auth::user()->id;
+        $newList -> user_id = $newUser->id;
         $newList -> save();
 
 
@@ -79,9 +84,10 @@ class UsersController extends Controller
         if (Auth::check()) {
             return redirect(route('myDay'));
         }
+        $listTitle = "Login";
         $themes = Theme::all();
         $currentTheme = Theme::where('id', rand(1,7))->first();
-        return view('auth.login', compact('themes','currentTheme'));
+        return view('auth.login', compact('themes','currentTheme', 'listTitle'));
     }
 
     public function loginPost(request $request)
@@ -114,9 +120,10 @@ class UsersController extends Controller
     //Reset Password
     public function forgot()
     {
+        $listTitle = "Forgot Password";
         $themes = Theme::all();
         $currentTheme = Theme::where('id', rand(1,7))->first();
-        return view('auth.forgotPassword', compact('themes','currentTheme'));
+        return view('auth.forgotPassword', compact('themes','currentTheme', 'listTitle'));
     }
 
     public function forgotPost(request $request)
@@ -134,9 +141,10 @@ class UsersController extends Controller
 
     public function resetPassword($token)
     {
+        $listTitle = "Reset Password";
         $themes = Theme::all();
         $currentTheme = Theme::where('id', rand(1,7))->first();
-        return view('auth.resetPassword', compact('themes','currentTheme', 'token'));
+        return view('auth.resetPassword', compact('themes','currentTheme', 'token', 'listTitle'));
     }
 
     public function resetPasswordPost(request $request)
@@ -164,5 +172,32 @@ class UsersController extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
+    }
+
+    public function editInfo(request $request)
+    {
+        $user = Auth::user();
+
+        if($request->name) {
+            $user -> name = $request->name;
+        }
+
+        if($request->profile) {
+            $tempFile = TempFile::where('folder', $request->profile)->first();
+
+            $user->clearMediaCollection('profile');
+
+            $user->addMedia(storage_path('app/profiles/tmp/' . $request->profile . '/' . $tempFile->fileName))->toMediaCollection('profile');
+            Storage::disk('local')->deleteDirectory('profiles/tmp/' . $request->profile);
+
+            $profile = $user->getFirstMedia('profile');
+            $user->profile = 'storage/'.$profile->id.'/'.$profile->file_name;
+
+            $tempFile->delete();
+        }
+
+        $user->save();
+
+        return redirect()->back();
     }
 }

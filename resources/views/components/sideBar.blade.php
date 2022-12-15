@@ -8,6 +8,9 @@
             <br>
             <span class="email">{{$user->email}}</span>
         </div>
+        <button class="btn editInfo" onclick="openEditInfo()">
+            Edit profile
+        </button>
         <form class="logoutForm" action="{{route('logout')}}" method="POST">
             {{csrf_field()}}
             <input type="submit" id="logout">

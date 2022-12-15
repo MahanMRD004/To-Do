@@ -28,8 +28,12 @@ function setImage(id) {
     });
 }
 
-function openModal(e) {
-    $('.modalWrapper').addClass('active')
+function openThemes(e) {
+    $('.themesModal').addClass('active')
+}
+
+function openEditInfo(e) {
+    $('.editInfoModal').addClass('active')
 }
 
 function closeModal() {

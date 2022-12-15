@@ -39,6 +39,8 @@ Route::post('/resetPasswordPost',[\App\Http\Controllers\UsersController::class,'
 
 Route::post('/logout',[\App\Http\Controllers\UsersController::class,'logout'])->name('logout');
 
+Route::post('/editInfo', [\App\Http\Controllers\UsersController::class,'editInfo'])->name('editInfo');
+
 
 //Lists & Tasks Handlers
 Route::post('/addTask', [\App\Http\Controllers\TasksController::class,'addTask'])->name('addTask');
