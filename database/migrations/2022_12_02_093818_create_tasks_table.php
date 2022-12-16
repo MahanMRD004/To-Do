@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(0)->index();
             $table->integer('priority')->default(0);
-            $table->unsignedBigInteger('todo_list_id')->nullable();
-            $table->date('date');
+            $table->unsignedBigInteger('todo_list_id')->index();
+            $table->date('date')->index();
             $table->timestamps();
         });
     }

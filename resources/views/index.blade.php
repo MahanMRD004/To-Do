@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="btn" onclick="openThemes()"><ion-icon name="sparkles-outline"></ion-icon></button>
+                <button class="btn" onclick="openThemes()"><ion-icon name="color-filter-outline"></ion-icon></button>
             </div>
         </header>
         <section class="content">
@@ -75,7 +75,7 @@
         </section>
         <section class="taskInput">
             <form  id="taskForm" action="{{route('addTask')}}" method="POST">
-                <input type="text" name="title" id="title" placeholder="Add Task" required>
+                <input type="text" name="title" id="title" placeholder="Add Task" maxlength="25" required>
                 <div class="wrapper">
                     <div class="selectWrapper">
                         <select name="id" class="listSelect">

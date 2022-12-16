@@ -12,7 +12,7 @@ class TasksController extends Controller
     public function addTask(request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|max:25',
             'date' => 'date'
         ]);
         $title = $request->title;

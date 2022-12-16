@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('todo_lists', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default('New List');
-            $table->unsignedBigInteger('user_id')->default(0);
+            $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('theme_id')->default(4);
             $table->timestamps();
         });

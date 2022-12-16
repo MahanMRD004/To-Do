@@ -286,6 +286,12 @@ body {
                         li {
                             position: relative;
 
+                            .navItem .navTitle {
+                                width: calc(100% - 55px);
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+
                             button {
                                 position: absolute;
                                 height: 100%;
@@ -352,6 +358,7 @@ body {
                     gap: 0.3rem;
                     color: var(--text-clr);
                     border-radius: 0.5rem;
+                    box-shadow: none;
 
                     ion-icon {
                         font-size: 1.7rem;
@@ -484,13 +491,13 @@ body {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+                        flex-shrink: 0;
                         background: var(--transparent-clr);
                         backdrop-filter: blur(25px);
                         border: 1px solid var(--transparent-clr);
                         border-radius: 0.4rem;
                         font-size: 1rem;
                         user-select: none;
-                        flex-shrink: 0;
                         transition: opacity 300ms ease;
 
                         &.emptyList {
@@ -577,7 +584,7 @@ body {
 
                         .info {
                             height: 100%;
-                            width: fit-content;
+                            width: calc(100% - 78px);
                             display: flex;
                             align-items: center;
                             gap: 0.5rem;
@@ -605,12 +612,14 @@ body {
 
                             .taskName {
                                 height: 100%;
+                                width: calc(100% - 25px);
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: flex-start;
                                 font-weight: 400;
                                 font-size: 0.9em;
+                                overflow: hidden;
 
                                 span {
                                     font-weight: 300;

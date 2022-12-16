@@ -12,7 +12,6 @@
             Edit profile
         </button>
         <form class="logoutForm" action="{{route('logout')}}" method="POST">
-            {{csrf_field()}}
             <input type="submit" id="logout">
             <label for="logout"><ion-icon name="log-out"></ion-icon></label>
         </form>
@@ -56,7 +55,7 @@
         </div>
     </div>
     <form class="controls" id="listForm" method="POST" action="{{route('addList')}}">
-        <input type="text" name="title" placeholder="New List" required>
+        <input type="text" name="title" placeholder="New List" maxlength="15" required>
         <button type="submit" class="btn btn-sq"><ion-icon name="add-outline"></ion-icon></button>
     </form>
 </div>

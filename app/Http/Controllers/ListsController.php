@@ -11,7 +11,7 @@ class ListsController extends Controller
     public function addList(request $request)
     {
         $this->validate($request, [
-            'title' => 'required'
+            'title' => 'required|max:15'
         ]);
         $title = $request->title;
         $newList = new TodoList();

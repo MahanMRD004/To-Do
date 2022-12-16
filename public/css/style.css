@@ -262,6 +262,11 @@ body .container-fluid .sidebar .nav .userListsWrapper .userLists {
 body .container-fluid .sidebar .nav .userListsWrapper .userLists li {
   position: relative;
 }
+body .container-fluid .sidebar .nav .userListsWrapper .userLists li .navItem .navTitle {
+  width: calc(100% - 55px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 body .container-fluid .sidebar .nav .userListsWrapper .userLists li button {
   position: absolute;
   height: 100%;
@@ -317,6 +322,7 @@ body .container-fluid .sidebar .controls .btn {
   gap: 0.3rem;
   color: var(--text-clr);
   border-radius: 0.5rem;
+  box-shadow: none;
 }
 body .container-fluid .sidebar .controls .btn ion-icon {
   font-size: 1.7rem;
@@ -431,13 +437,13 @@ body .container-fluid main .content .todoList .todoItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
   background: var(--transparent-clr);
   backdrop-filter: blur(25px);
   border: 1px solid var(--transparent-clr);
   border-radius: 0.4rem;
   font-size: 1rem;
   user-select: none;
-  flex-shrink: 0;
   transition: opacity 300ms ease;
 }
 body .container-fluid main .content .todoList .todoItem.emptyList {
@@ -510,7 +516,7 @@ body .container-fluid main .content .todoList .todoItem ion-icon[name=star] {
 }
 body .container-fluid main .content .todoList .todoItem .info {
   height: 100%;
-  width: fit-content;
+  width: calc(100% - 78px);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -534,12 +540,14 @@ body .container-fluid main .content .todoList .todoItem .info .check ion-icon {
 }
 body .container-fluid main .content .todoList .todoItem .info .taskName {
   height: 100%;
+  width: calc(100% - 25px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   font-weight: 400;
   font-size: 0.9em;
+  overflow: hidden;
 }
 body .container-fluid main .content .todoList .todoItem .info .taskName span {
   font-weight: 300;
