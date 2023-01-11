@@ -15,11 +15,11 @@
             <form action="{{route('signupPost')}}" method="POST" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Sombody" required>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Somebody" required>
                     <label for="name">Name</label>
                 </div>
                 <div class="form-floating">
-                    <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email@example.com" required>
+                    <input type="email" class="form-control" name="email" id="floatingInput" placeholder="Example@gmail.com" required>
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="form-floating">
@@ -27,7 +27,7 @@
                     <label for="password">Password</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" name="verifyPassword" id="verifyPassword" placeholder="Password" required>
+                    <input type="password" class="form-control" name="verifyPassword" id="verifyPassword" placeholder="Re-Enter Password" required>
                     <label for="verifyPassword">Re-Enter Password</label>
                 </div>
                 <div class="form-floating imageInput">
@@ -36,7 +36,7 @@
                 </div>
                 <input type="submit" value="Signup">
             </form>
-            @include('components.validaitionError')
+            @include('components.validationError')
             <p>Already have an account? <a href="{{route('login')}}">Login</a></p>
         </div>
 @endsection

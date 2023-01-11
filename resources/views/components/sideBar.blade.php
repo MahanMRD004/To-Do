@@ -8,7 +8,7 @@
             <br>
             <span class="email">{{$user->email}}</span>
         </div>
-        <button class="btn editInfo" onclick="openEditInfo()">
+        <button class="btn editInfo" onclick="openModal('editUserInfo')">
             Edit profile
         </button>
         <form class="logoutForm" action="{{route('logout')}}" method="POST">

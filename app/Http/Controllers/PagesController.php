@@ -90,7 +90,7 @@ class PagesController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             $todo_list_id = $id;
-            $selectedList = TodoList::with('tasks','theme')->find($id);
+            $selectedList = TodoList::with('tasks','theme')->findOrFail($id);
             $listTitle = $selectedList->title;
             $lists = TodoList::where('user_id',$user->id)->get();
             $tasks = $selectedList->tasks;

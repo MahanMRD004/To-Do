@@ -6,6 +6,7 @@ html {
     --secondary-clr: #A0C0D6;
     --text-clr: #E5FAFC;
     --danger-clr: #DF7356;
+    --danger-clr-hover: #bf634c;
     --active-clr: rgba(187, 187, 187, 0.19);
     --transparent-clr: #ffffff20;
     --inverted-clr: #2c2c2c;
@@ -74,6 +75,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    background: linear-gradient(to right bottom, var(--bg-clr), var(--primary-clr));
     font-family: 'Poppins', sans-serif;
     color: var(--text-clr);
 
@@ -400,6 +402,7 @@ body {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                flex-shrink: 0;
 
                 .wrapper .btn {
                     position: relative;
@@ -470,7 +473,7 @@ body {
             }
 
             .content {
-                height: calc(100% - 145px);
+                height: calc(100% - 170px);
                 width: 100%;
 
                 .todoList {
@@ -482,7 +485,7 @@ body {
                     list-style: none;
                     padding: 0;
                     padding-inline: min(2vw, 0.5rem);
-                    overflow-y: auto;
+                    overflow: hidden auto;
 
                     .todoItem {
                         position: relative;
@@ -498,7 +501,8 @@ body {
                         border-radius: 0.4rem;
                         font-size: 1rem;
                         user-select: none;
-                        transition: opacity 300ms ease;
+                        transform: translateX(0);
+                        transition: opacity 300ms ease, transform 450ms ease;
 
                         &.emptyList {
                             height: 100%;
@@ -507,6 +511,8 @@ body {
                             background: transparent;
                             backdrop-filter: none;
                             border: none;
+                            transform: scale(1);
+                            transition: opacity 300ms ease, transform 300ms ease;
 
                             .emptyContent {
                                 height: fit-content;
@@ -518,10 +524,10 @@ body {
                                 align-items: center;
                                 gap: 1rem;
                                 background: #00000020;
-                                backdrop-filter: blur(3px);
+                                backdrop-filter: blur(75px);
                                 border: 2px solid var(--transparent-clr);
                                 border-radius: 1rem;
-                                padding: min(5vw, 2rem) min(10vw, 5rem);
+                                padding: min(2.5vw, 1.7rem) min(6vw, 4rem);
                                 margin: 1rem;
 
                                 .text {
@@ -622,6 +628,10 @@ body {
                                 overflow: hidden;
 
                                 span {
+                                    height: fit-content;
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: center;
                                     font-weight: 300;
                                     font-size: 0.8em;
                                     color: var(--text-clr);
@@ -655,6 +665,17 @@ body {
                         }
                     }
                 }
+
+                &.loading {
+                    .todoList .todoItem {
+                        transform: translateX(120%);
+                        transition-delay: 0s;
+
+                        &.emptyList {
+                            transform: scale(0);
+                        }
+                    }
+                }
             }
 
             .taskInput {
@@ -663,6 +684,7 @@ body {
                 backdrop-filter: blur(150px);
                 border-radius: 0.5rem;
                 overflow: hidden;
+                flex-shrink: 0;
 
                 form {
                     height: 100%;
@@ -740,6 +762,10 @@ body {
                         height: 100%;
                         aspect-ratio: 1;
                         overflow: hidden;
+
+                        &:hover {
+                            background-color: var(--transparent-clr);
+                        }
                     }
 
                     input[type="date"] {
@@ -904,6 +930,14 @@ body {
                     border-radius: 0.4rem;
                     transition: 300ms background ease;
 
+                    &.danger {
+                        background: var(--danger-clr);
+
+                        &:hover {
+                            background: var(--danger-clr-hover);
+                        }
+                    }
+
                     &:hover {
                         background: var(--secondary-clr);
                     }
@@ -949,18 +983,19 @@ body {
             justify-content: center;
             align-items: center;
             inset: 0;
-            background-color: #00000075;
+            background-color: #00000000;
             z-index: 10;
             visibility: hidden;
             opacity: 0;
-            transition: opacity 500ms ease;
+            transition: background-color 500ms ease;
 
             &.active {
+                background-color: #00000075;
                 visibility: visible;
                 opacity: 1;
 
                 .modal {
-                    transform: translateY(0);
+                    transform: scale(1);
                 }
             }
 
@@ -982,7 +1017,7 @@ body {
                 padding: min(5vw, 2rem);
                 margin: 1rem;
                 box-shadow: 0 0 1rem 3px #00000025;
-                transform: translateY(-55px);
+                transform: scale(0);
                 transition: transform 500ms linear;
 
                 .btn {
@@ -1151,6 +1186,17 @@ body {
 
                     .form-floating {
                         width: 100%;
+
+                        &.textarea {
+                            height: fit-content;
+
+                            textarea {
+                                max-height: 375px;
+                                border: 1px solid var(--transparent-clr);
+                                border-radius: 0.5rem;
+                                font-size: 0.85rem;
+                            }
+                        }
                     }
                 }
             }

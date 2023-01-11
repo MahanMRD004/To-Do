@@ -58,4 +58,19 @@ class TasksController extends Controller
         $task->priority = $value;
         $task->save();
     }
+
+    public function editNote(request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'note' => 'required|max:125',
+        ]);
+        $id = $request -> id;
+        $note = $request -> note;
+        $task = Task::findOrFail($id);
+        $task -> note = $note;
+        $task -> save();
+
+        return redirect()->back();
+    }
 }

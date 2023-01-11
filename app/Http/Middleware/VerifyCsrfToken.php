@@ -18,6 +18,9 @@ class VerifyCsrfToken extends Middleware
         'removeList',
         'check',
         'setPriority',
-        'logout'
+        'logout',
+        'editInfo',
+        'setTheme',
+        'editNote'
     ];
 }

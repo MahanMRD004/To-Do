@@ -134,8 +134,14 @@ class UsersController extends Controller
             $request->only('email')
         );
 
+        if (Auth::check()) {
+            $url = route('deleteAccount');
+        } else {
+            $url = route('login');
+        }
+
         return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
+            ? redirect($url)
             : back()->withErrors(['email' => __($status)]);
     }
 
@@ -174,6 +180,8 @@ class UsersController extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
+    //Edi Info
+
     public function editInfo(request $request)
     {
         $user = Auth::user();
@@ -199,5 +207,31 @@ class UsersController extends Controller
         $user->save();
 
         return redirect()->back();
+    }
+
+    //Delete Account
+    public function deleteAccount()
+    {
+        $listTitle = "Forgot Password";
+        $themes = Theme::all();
+        $currentTheme = Theme::where('id', rand(1,7))->first();
+        return view('auth.deleteAccount', compact('themes','currentTheme', 'listTitle'));
+    }
+
+    public function deleteAccountPost(request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:6'
+        ]);
+        $user = Auth::user();
+
+        if (password_verify($request->password, $user->password)) {
+            $user->delete();
+            return redirect(route('signup'));
+        } else {
+            $validator->getMessageBag()->add('password', 'Wrong password');
+        }
+
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 }

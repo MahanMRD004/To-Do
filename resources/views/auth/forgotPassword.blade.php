@@ -11,12 +11,12 @@
         <form action="{{route('forgotPost')}}" method="POST">
             {{csrf_field()}}
             <div class="form-floating">
-                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email@example.com" required>
+                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="example@gmail.com" required>
                 <label for="floatingInput">Email</label>
             </div>
             <input type="submit" value="Send Email">
         </form>
-        @include('components.validaitionError')
-        <p>Return to <a href="{{route('signup')}}">Signup</a></p>
+        @include('components.validationError')
+        <p>Return to <a href="@if(auth()->check()) {{route('deleteAccount')}} @else {{route('login')}} @endif">previous page</a></p>
     </div>
 @endsection

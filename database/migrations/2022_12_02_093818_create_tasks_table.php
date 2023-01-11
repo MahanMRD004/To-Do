@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('status')->default(0)->index();
             $table->integer('priority')->default(0);
+            $table->string('note')->nullable();
             $table->unsignedBigInteger('todo_list_id')->index();
             $table->date('date')->index();
             $table->timestamps();

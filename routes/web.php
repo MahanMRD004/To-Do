@@ -34,13 +34,15 @@ Route::post('/loginPost',[\App\Http\Controllers\UsersController::class,'loginPos
 Route::get('/forgot',[\App\Http\Controllers\UsersController::class,'forgot'])->name('forgot');
 Route::post('/forgotPost',[\App\Http\Controllers\UsersController::class,'forgotPost'])->name('forgotPost');
 
-Route::get('/resetPassword/{token}',[\App\Http\Controllers\UsersController::class,'resetPassword'])->middleware('guest')->name('resetPassword');
+Route::get('/resetPassword/{token}',[\App\Http\Controllers\UsersController::class,'resetPassword'])->name('resetPassword');
 Route::post('/resetPasswordPost',[\App\Http\Controllers\UsersController::class,'resetPasswordPost'])->name('resetPasswordPost');
 
 Route::post('/logout',[\App\Http\Controllers\UsersController::class,'logout'])->name('logout');
 
 Route::post('/editInfo', [\App\Http\Controllers\UsersController::class,'editInfo'])->name('editInfo');
 
+Route::get('/deleteAccount',[\App\Http\Controllers\UsersController::class,'deleteAccount'])->name('deleteAccount');
+Route::post('/deleteAccountPost',[\App\Http\Controllers\UsersController::class,'deleteAccountPost'])->name('deleteAccountPost');
 
 //Lists & Tasks Handlers
 Route::post('/addTask', [\App\Http\Controllers\TasksController::class,'addTask'])->name('addTask');
@@ -51,10 +53,12 @@ Route::post('/check', [\App\Http\Controllers\TasksController::class,'check'])->n
 
 Route::post('/setPriority', [\App\Http\Controllers\TasksController::class,'setPriority'])->name('setPriority');
 
+Route::post('/editNote', [\App\Http\Controllers\TasksController::class,'editNote'])->name('editNote');
+
+
 Route::post('/addList', [\App\Http\Controllers\ListsController::class,'addList'])->name('addList');
 
 Route::post('/removeList', [\App\Http\Controllers\ListsController::class,'removeList'])->name('removeList');
-
 
 // Themes
 Route::post('/setTheme', [\App\Http\Controllers\ListsController::class,'setTheme'])->name('setTheme');

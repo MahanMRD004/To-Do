@@ -31,13 +31,13 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="btn" onclick="openThemes()"><ion-icon name="color-filter-outline"></ion-icon></button>
+                <button class="btn" onclick="openModal('themesModal')"><ion-icon name="color-filter-outline"></ion-icon></button>
             </div>
         </header>
-        <section class="content">
+        <section class="content loading">
             <ul class="todoList">
                 @forelse($tasks as $task)
-                    <li class="todoItem @if($task->priority == 1)stared @endif  @if($task->status == 1)done @endif" id="item{{$task->id}}">
+                    <li class="todoItem @if($task->priority == 1)stared @endif  @if($task->status == 1)done @endif" id="item{{$task->id}}" style="transition-delay: {{($loop->iteration -1 ) * 0.1}}s;">
                             <span class="info">
                                 <button onclick="check({{$task->id}})" class="check" id="check{{$task->id}}">
                                     <ion-icon name="checkmark-outline"></ion-icon>
@@ -49,6 +49,9 @@
                                 </span>
                             </span>
                         <div class="controls">
+                            <button onclick="editNote('{{$task->title}}','{{$task->id}}','{{$task->note}}')">
+                                @if($task->note != null) <ion-icon name="information-circle"></ion-icon> @else <ion-icon name="information-circle-outline"> @endif
+                            </button>
                             <button onclick="setPriority({{$task->id}})">
                                 <ion-icon name="star-outline"></ion-icon>
                                 <ion-icon name="star"></ion-icon>
@@ -99,7 +102,6 @@
         <div class="modal">
             <button class="btn" onclick="closeModal()"><ion-icon name="close-outline"></ion-icon></button>
             <form  class="themeSelector" action="{{route('setTheme')}}" method="POST">
-                {{csrf_field()}}
                 <h5>Select Theme</h5>
                 <ul class="themes">
                     @foreach($themes as $theme)
@@ -123,15 +125,14 @@
         </div>
     </div>
 
-    <div class="modalWrapper editInfoModal">
+    <div class="modalWrapper editInfoModal editUserInfo">
         <div class="modal">
             <h5>Change your info</h5>
             <button class="btn" onclick="closeModal()"><ion-icon name="close-outline"></ion-icon></button>
             <div class="formWrapper">
             <form  action="{{route('editInfo')}}" method="POST">
-                {{csrf_field()}}
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Sombody">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Somebody">
                     <label for="name">Name</label>
                 </div>
                 <div class="form-floating imageInput">
@@ -139,7 +140,21 @@
                     <label for="profile">Profile</label>
                 </div>
                 <input type="submit">
+                <p>Want to delete your account? <a href="{{route('deleteAccount')}}" style="color: var(--danger-clr)">Delete Account</a></p>
             </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modalWrapper editInfoModal editNote">
+        <div class="modal">
+            <h5 id="taskTitle">Task Name</h5>
+            <button class="btn" onclick="closeNote()"><ion-icon name="close-outline"></ion-icon></button>
+            <div class="formWrapper">
+                <form action="{{route('editNote')}}" method="POST" id="editNoteForm">
+                    <input type="hidden" id="id" name="id" value="0">
+                    <input type="submit" value="Save">
+                </form>
             </div>
         </div>
     </div>
@@ -159,4 +174,6 @@
             }
         });
     </script>
+    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/singlePage.js')}}"></script>
 @endsection

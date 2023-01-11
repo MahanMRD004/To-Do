@@ -11,7 +11,7 @@
         <form action="{{route('loginPost')}}" method="POST">
             {{csrf_field()}}
             <div class="form-floating">
-                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email@example.com" required>
+                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="example@gmail.com" required>
                 <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating">
@@ -26,7 +26,7 @@
             </div>
             <input type="submit" value="Login">
         </form>
-        @include('components.validaitionError')
+        @include('components.validationError')
         <div class="wrapper">
             <p>Don't have an account? <a href="{{route('signup')}}">Signup page</a> <br> Need Help? <a href="{{route('forgot')}}">Reset password</a></p>
         </div>

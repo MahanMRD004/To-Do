@@ -12,7 +12,7 @@
             {{csrf_field()}}
             <input type="hidden" name="token" value="{{$token}}">
             <div class="form-floating">
-                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email@example.com" required>
+                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="example@gmail.com" required>
                 <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating">
@@ -20,11 +20,11 @@
                 <label for="password">Password</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" name="verifyPassword" id="verifyPassword" placeholder="Password" required>
+                <input type="password" class="form-control" name="verifyPassword" id="verifyPassword" placeholder="Re-Enter Password" required>
                 <label for="verifyPassword">Re-Enter Password</label>
             </div>
             <input type="submit" value="Reset Password">
         </form>
-        @include('components.validaitionError')
+        @include('components.validationError')
     </div>
 @endsection
